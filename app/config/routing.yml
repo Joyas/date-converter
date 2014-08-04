@@ -1,0 +1,4 @@
+th_date_converter:
+    resource: "@THDateConverterBundle/Resources/config/routing.yml"
+    prefix:   /
+

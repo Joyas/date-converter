@@ -1,0 +1,7 @@
+<body>
+    {% if error is defined %}
+        <h1 style="color: red;"> {{error }} </h1>
+    {% elseif date is defined %}
+        <h1> Date => {{ date }} </h1>
+    {% endif %}
+</body>
