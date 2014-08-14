@@ -15,7 +15,7 @@ class Date
         if (count($split_date) == 3)
         {
             $this->setDate(intval($split_date[0]), intval($split_date[1]), intval($split_date[2]));
-            $_dateType = $type;
+            $this->_dateType = $type;
         }
         else
             $this->error();

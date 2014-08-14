@@ -1,3 +1,9 @@
 th_date_converter_julian:
     path:     /julian
     defaults: { _controller: THDateConverterBundle:Julian:index }
+th_date_converter_gregorian:
+    path:     /gregorian
+    defaults: { _controller: THDateConverterBundle:Gregorian:index }
+th_date_easter:
+    path:     /easter
+    defaults: { _controller: THDateConverterBundle:Easter:index }
