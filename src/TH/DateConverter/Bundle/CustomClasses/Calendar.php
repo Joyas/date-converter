@@ -4,33 +4,53 @@ namespace TH\DateConverter\Bundle\CustomClasses;
 
 use TH\DateConverter\Bundle\CustomClasses\CalendarType;
 use TH\DateConverter\Bundle\CustomClasses\Date;
+use TH\DateConverter\Bundle\Entity\King;
 
 class Calendar
 {
     // Translate a date from gregorian to julian
     public static function GregorianToJulian($date)
     {
-        $d = $date->getDay();
-        $m = $date->getMonth();
-        $y = $date->getYear();
-        $jd = gregoriantojd($m, $d, $y);
-        $date = jdtojulian($jd);
-        return (new Date(Date::mdyToDmy($date), CalendarType::Julian));
+        if ($date->getType() == CalendarType::Gregorian)
+        {
+            $d = $date->getDay();
+            $m = $date->getMonth();
+            $y = $date->getYear();
+            $jd = gregoriantojd($m, $d, $y);
+            $date = jdtojulian($jd);
+            return (new Date(Date::mdyToDmy($date), CalendarType::Julian));
+        }   
+        else 
+            return ($date);
     }
     
     // Translate a date from julian to gregorian
     public static function julianToGregorian($date) {
-        $d = $date->getDay();
-        $m = $date->getMonth();
-        $y = $date->getYear();
-        $jd = juliantojd($m, $d, $y);
-        $date = jdtogregorian($jd);
-        return (new Date(Date::mdyToDmy($date), CalendarType::Gregorian));
+        if ($date->getType() == CalendarType::Julian)
+        {
+            $d = $date->getDay();
+            $m = $date->getMonth();
+            $y = $date->getYear();
+            $jd = juliantojd($m, $d, $y);
+            $date = jdtogregorian($jd);
+            return (new Date(Date::mdyToDmy($date), CalendarType::Gregorian));
+        }
+        else 
+            return ($date);
     }
     
     
-    public static function kingToGregorian($date, $king) {
-        
+    public static function kingToGregorian($date, $king, $em) {
+        $repository = $em->getRepository('THDateConverterBundle:King');
+        $kingEntity = $repository->getKingByName($king);
+        if (count($kingEntity) != 1)
+            return null;
+        else 
+        {
+            $kingYear = intval(date_format($kingEntity[0]->getStartDateReign(), 'Y'));
+            $finalDate = new Date(Date::dateToString($date->getDay(), $date->getMonth(), $date->getYear() + $kingYear), CalendarType::Gregorian);
+            return ($finalDate);
+        }
     }
     
     // As described in 

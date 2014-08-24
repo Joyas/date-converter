@@ -1,0 +1,9 @@
+{# defined works with variable names #}
+{% if info is defined %}
+    <h1 style="color: green;">{{ info }}</h1>
+{% endif %}
+
+{% if form is defined %}
+    {{ form(form) }}
+{% endif %}
+

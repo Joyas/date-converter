@@ -7,3 +7,12 @@ th_date_converter_gregorian:
 th_date_easter:
     path:     /easter
     defaults: { _controller: THDateConverterBundle:Easter:index }
+th_date_addking:
+    path:     /addKing
+    defaults: { _controller: THDateConverterBundle:King:addKing }
+th_date_king:
+    path:     /king
+    defaults: { _controller: THDateConverterBundle:King:index }
+th_documentation:
+    path:     /documentation
+    defaults: { _controller: THDateConverterBundle:Documentation:index }
