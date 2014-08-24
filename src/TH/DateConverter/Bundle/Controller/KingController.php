@@ -26,7 +26,7 @@ class KingController extends Controller
             if (is_null($date) == TRUE || is_null($king) == TRUE) {
                 throw new \Exception("Error: Missing or bad arguments.\nArgument: kingDate [format: DD/MM/YY] and king. You can see all the kings managed on /info.");
             }
-            $convertDate = Calendar::kingToGregorian(new Date($date, CalendarType::Gregorian), $king, $this->getDoctrine()->getManager());
+            $convertDate = Calendar::kingToGregorian(new Date($date, CalendarType::Julian), $king, $this->getDoctrine()->getManager());
             $data = array(
                 "responseCode" => "success",
                 "responseMessage" => "success",

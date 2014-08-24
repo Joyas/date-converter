@@ -4,25 +4,882 @@
 
 {% block body %}
     <div id="container">
-        
+        <br />
         <div id="site-name" class="color">
             Date-converter 
-            <br/>
+        </div>
+        <div id="second-site-name" class="color">
             Documentation
         </div>
+        <div id="author" class="left">
+            By Thomas Huygens
+        </div>
         <br />
-        <h1>Introduction</h1>
-            <div class="text"> 
-                Any applicatiofezfzn willing to communicate with AXA Banque’s API must be authenticated by setting client_id. This public key is the unique identifier of your application vis-à-vis AXA Banque Information System. It can be retrieved after having created a developer account on developer.axabanque.fr site.
-            </div>
-
-        <h2>What does this API provide?</h2>
+        <br />
+        <br />
+        <br />
+        <h1>Welcome on the date-converter documentation!</h1>
+        <h2> Why this project?</h2>
+        <div class="text"> 
+            The date converter project is a computing project research wrote by Thomas Huygens in 2014. This project research has been write for the university of Kent, in england, and has been supervised by the professor Colin Johnson.
+        </div>
+        <h2>What is the problem we want to solve?</h2>
             <div class="text">
-                Any application willing to communicate with AXA Banque’s API must be authenticated by setting client_id. This public key is the unique identifier of your application vis-à-vis AXA Banque Information System. It can be retrieved after having created a developer account on developer.axabanque.fr site.
+                We have noticed that when we study historical documents, it could be very difficult to date those or even know which one appears in first. Indeed, the date in historical documents can use different systems. Sometimes, it also uses some christian feast (Easter, christmas, Michaelmas and others) or the regnal years of the current king. <br /><br />
+                But the main issue is the different calendars which have been used over the years. Indeed, a lot of different calendars exist for several reasons. Firstly, different calendars have been created by different civilisations; secondly a same population could use multiple calendars simultaneously, with different purposes. For example, one calendar used only for religious and political purpose, and another one used for the agriculture and the trade. <br /><br />
+                Because of all those calendars, it could become very difficult to situate precisely an event. Indeed, if you want to compare the date of two different historical documents, you will need to convert them in the same calendar and at least make the comparison. However in order to realise this conversion, you will need a lot of knowledge about both calendars that are used, and then apply some formula to convert the date, and finally you will compare them. <br />Furthermore, it exists no tool that converts a date from any calendar in another calendar. However, with the number of calculations than a computer can solve any second, a tool of that kind could exist. In order to change it, and to help the people who could be confronted to that kind of problems, we want to create an API which allows the user to put a date in a specific calendar and then, get the same date in the Gregorian calendar which is currently the most used in the world.
             </div>
-        <h2>How do I use the API?</h2>
+        <h2>Quick description of the project</h2>
             <div class="text">
-                Any application willing to communicate with AXA Banque’s API must be authenticated by setting client_id. This public key is the unique identifier of your application vis-à-vis AXA Banque Information System. It can be retrieved after having created a developer account on developer.axabanque.fr site.
+                In order to change it, and to help the people who could be confronted to that kind of problems, we want to create an API which allows the user to put a date in a specific calendar (or a different type of date using regnal years or christian feasts) and then, get the same date in the Gregorian calendar which is currently the most used in the world. <br /> <br />
+                Precisely, an API (Applications Programming Interface) is a program that can be contact by external programs in order to share some data, or even make some compute. For example in our case, external programs will contact our API in order to convert historical date. The external programs will contact our API using a web service, using the JSON language. 
             </div>
-    </div>
+        <h2>How do I access to this API?</h2>
+            <div class="text">
+                In order to use this API, there are multiple ways. Currently, no servers are available on the internet but the entire code is on github, and you can find it <a href="https://github.com/Joyas/date-converter">here</a>. This API has been code using the framework symfony2 (You can find all the information about it <a href="http://symfony.com/">here</a>). This framework use the infrastructure MVC (Model - View - Controller) in order to simplify the development and the maintenance of the code. <br /><br />Symfony2 is structured using what is called a bundle. You can easily add a bundle on your project in order to use what is contained. The date-converter project is based on one bundle, the THDateConverterBundle. To do that, you just have to put the repository TH on your project and restart it. <br /><br />The second way is to install the full project and launch a server in localhost. All the install process is described on the README.md
+            </div>
+        <h1>The WebService</h1>
+            <h2>What is a Web Service?</h2>
+            <div class="text">
+                According to W3.org (2014), a Web service "is a software system designed to support interoperable machine-to-machine interaction over a network". In our case, the network will be obviously the internet, and the software will be the website which allows another machine to query the website in order to get some information. 
+            </div>
+            <h2>How query the web Service ?</h2>
+            <div class="text">
+                In order to query the web service, you must query the server (for example localhost) using the HTTP protocol (You can find the documentation of this protocol <a href="http://tools.ietf.org/html/rfc2616">here</a>.) for example with the command curl on a terminal or using a web browser. However, you have to query the web service with some parameters and on the good routes. Then you will get a response in JSON, which is a text format like XML (You can have a full description of JSON on its RFC that you can find <a href="http://www.ietf.org/rfc/rfc4627.txt">here</a>). So the next chapter will contain a full description of the web service!
+            </div>
+            <h1>Description of the Web Service</h1>
+                <div class="text">
+                    In this chapter, all the title of the section will begin with the HTTP method that you have to use follow by the route. Then it will be a full description of this query, with the parameters that you have to send with the query, and also the description of the response you will get.
+                </div>
+            <h2 class="bold">GET /documentation</h2>
+            <div class="text">
+                This route is where you are currently! Indeed, with your web browser the default HTTP method use is GET, and you are on the route /documentation as you can see on your url. In this page, you will get all the information about the date-converter application, and a full description of the Web service. It will be very useful when you will query the Web service, in order to exactly know the parameters for a specific route.
+            </div>                
+            <h2 class="bold">GET /julian</h2>
+            <div class="text">
+                This is used to convert a date using the julian calendars in the Gregorian calendar.
+            </div>            
+            <h3>Parameters</h3>
+            <div class="text">
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                date 
+                            </td>
+                            <td>
+                                The julian date that you want to convert. 
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Response Content</h3>
+            <div class="text">
+                The main parameters of the response: <br />
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                responseCode
+                            </td>
+                            <td>
+                                Content either "success" or "failure" to know if it works.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                result
+                            </td>
+                            <td>
+                                If it success, contains all the information that you want depends of the parameters, otherwise is empty.
+                            </td>
+                            <td>
+                                Array
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                The content of the "result" array:<br />
+               <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                originalDate
+                            </td>
+                            <td>
+                                The date that you send to the API, using the julian calendar.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                convertDate
+                            </td>
+                            <td>
+                                The convertion of the origalDate in the gregorian calendar.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                day
+                            </td>
+                            <td>
+                                The day of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                month
+                            </td>
+                            <td>
+                                The month of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                year
+                            </td>
+                            <td>
+                                The year of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                calendarType
+                            </td>
+                            <td>
+                                The convertDate calendar type. All the type are described on the Calendar Type section.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 class="bold">GET /gregorian</h2>
+            <div class="text">
+                This is used to convert a date using the gregorian calendar in another one.
+            </div>            
+            <h3>Parameters</h3>
+            <div class="text">
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                date 
+                            </td>
+                            <td>
+                                The gregorian date that you want to convert. 
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                returnType
+                            </td>
+                            <td>
+                                The type of the calendar in which you want to convert the gregorian date.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Response Content</h3>
+            <div class="text">
+                The main parameters of the response: <br />
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                responseCode
+                            </td>
+                            <td>
+                                Content either "success" or "failure" to know if it works.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                result
+                            </td>
+                            <td>
+                                If it success, contains all the information that you want depends of the parameters, otherwise is empty.
+                            </td>
+                            <td>
+                                Array
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                The content of the "result" array:<br />
+               <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                originalDate
+                            </td>
+                            <td>
+                                The date that you send to the API, using the gregorian calendar.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                convertDate
+                            </td>
+                            <td>
+                                The convertion of the originalDate in the calendar that you have specified.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                day
+                            </td>
+                            <td>
+                                The day of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                month
+                            </td>
+                            <td>
+                                The month of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                year
+                            </td>
+                            <td>
+                                The year of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                calendarType
+                            </td>
+                            <td>
+                                The convertDate calendar type. All the type are described on the Calendar Type section.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 class="bold">GET /easter</h2>
+            <div class="text">
+                This is used to know the date of the easter day on a specific year. 
+            </div>            
+            <h3>Parameters</h3>
+            <div class="text">
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                year 
+                            </td>
+                            <td>
+                               The year in which you want to know the easter date.
+                            </td>
+                            <td>
+                                YYYY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                returnType
+                            </td>
+                            <td>
+                                The type of the calendar in which you want the date of easter. All the type are described on the Calendar Type section.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Response Content</h3>
+            <div class="text">
+                The main parameters of the response: <br />
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                responseCode
+                            </td>
+                            <td>
+                                Content either "success" or "failure" to know if it works.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                result
+                            </td>
+                            <td>
+                                If it success, contains all the information that you want depends of the parameters, otherwise is empty.
+                            </td>
+                            <td>
+                                Array
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                The content of the "result" array:<br />
+               <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                year
+                            </td>
+                            <td>
+                                The year that you send to the API.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                easterDate
+                            </td>
+                            <td>
+                                The date of easter in the year and using the calendar that you specified.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                day
+                            </td>
+                            <td>
+                                The day of the easter date.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                month
+                            </td>
+                            <td>
+                                The month of the easter date.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                year
+                            </td>
+                            <td>
+                                The year of the easter date.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                calendarType
+                            </td>
+                            <td>
+                                The easter date calendar type. All the type are described on the Calendar Type section.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 class="bold">GET /king</h2>
+            <div class="text">
+                This is used to convert a date using the king in the calendar that you specified. For example, you can know the gregorian date of the date: 2nd May, 5 Henry V.
+            </div>            
+            <h3>Parameters</h3>
+            <div class="text">
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                kingDate 
+                            </td>
+                            <td>
+                                The date that you want to convert using the regnal years of a king. For example, the date 2nd May, 5 Henry V will be 02/05/05.
+                            </td>
+                            <td>
+                                DD/MM/YY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                king
+                            </td>
+                            <td>
+                                The king which is used for the kingDate. All the king are listed on the Kings section.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Response Content</h3>
+            <div class="text">
+                The main parameters of the response: <br />
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                responseCode
+                            </td>
+                            <td>
+                                Content either "success" or "failure" to know if it works.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                result
+                            </td>
+                            <td>
+                                If it success, contains all the information that you want depends of the parameters, otherwise is empty.
+                            </td>
+                            <td>
+                                Array
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                The content of the "result" array:<br />
+               <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                originalDate
+                            </td>
+                            <td>
+                                The date that you send to the API.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                convertDate
+                            </td>
+                            <td>
+                                The convertion of the originalDate in the julian calendar.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                day
+                            </td>
+                            <td>
+                                The day of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                month
+                            </td>
+                            <td>
+                                The month of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                year
+                            </td>
+                            <td>
+                                The year of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                calendarType
+                            </td>
+                            <td>
+                                The convertDate calendar type. All the type are described on the Calendar Type section.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h1>Which parameters are managed?</h1>
+            <h2>Calendar Type </h2>
+            <div class="text">
+               <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Name of the Calendar
+                            </th>
+                            <th>
+                                Name that you must put as parameters
+                            </th>   
+                            <th>
+                                Convertion from Gregorian to this calendar
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                The Julian Calendar
+                            </td>
+                            <td>
+                                Julian
+                            </td>
+                            <td>
+                                yes
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                The Gregorian Calendar
+                            </td>
+                            <td>
+                                Gregorian
+                            </td>
+                            <td>
+                                yes
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2>Kings</h2>
+                <div class="text">
+                    <table>
+                        <tbody> 
+                            <tr>
+                                <th>
+                                    Name of the king
+                                </th>
+                                <th>
+                                    Beginning of her or his reign
+                                </th>   
+                                <th>
+                                    End of her or his reign
+                                </th>   
+                            </tr>
+                            {% for king in kings %}
+                                 <tr>
+                                    <td>
+                                        {{ king.name }}
+                                    </td>
+                                    <td>
+                                        {{ king.startDateReign.format("d/m/Y") }}
+                                    </td>
+                                    <td>
+                                        {{ king.endDateReign.format("d/m/Y") }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <h1> Conclusion </h1>
+                <div class="text">
+                    As you see, this project is already working. However, we would like to manage the more possible of calendars, so some of them could be add at anytime. You can contact us using the Github account or even participate to this project by the same way !<br /><br />
+                    <strong>Thank you for being interested in this project!</strong>
+                </div>
+        </div>
 {% endblock %}
