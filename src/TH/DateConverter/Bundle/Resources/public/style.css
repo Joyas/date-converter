@@ -1,0 +1,194 @@
+/**
+ * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+ * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
+ * html5doctor.com/html-5-reset-stylesheet/
+ */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content: ""; content: none; }
+
+ins { background-color: #ff9; color: #000; text-decoration: none; }
+
+mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+
+input, select { vertical-align: middle; }
+
+/**
+* The css of the page
+*/
+
+body
+{
+    font: 13px/1.231 sans-serif;
+}
+
+
+body {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+
+#container
+{
+    text-align:left;
+    position:relative;
+    padding:0;
+    margin:0 auto;
+    width:800px;
+    padding-top: 2em;
+    padding-bottom: 4em;
+}
+
+.color
+{
+    color: #444;
+}
+
+#site-name
+{
+    padding-left: 3%;
+    font-variant: small-caps;
+    font-size: 4em;
+    letter-spacing: 3px;
+    text-decoration: none;
+    line-height: 45px;
+}
+
+#second-site-name
+{
+    padding-left: 3%;
+    font-variant: small-caps;
+    letter-spacing: 3px;
+    text-decoration: none;
+    line-height: 45px;
+    font-size: 3em;  
+}
+
+/* Default fonts */
+h1,h2,h3,
+h4,h5,h6  { font-family: "Helvetica Neue", Helvetica, sans-serif; }
+body      { font-family: "Lucida Grande", Calibri, Arial, sans-serif; }
+pre       { font-family: Monaco, "Courier New", monospace; }
+code      { font-family: Consolas, "Bitstream Vera Sans Mono", "Courier New", Monaco, Courier, monospace; }
+
+
+h1, h2, h3, h4, h5, h6 
+{   
+    font-weight: bold;
+    color: #111;
+    clear: both;
+}
+
+
+h1
+{
+    font-size: 32px;
+    line-height: 40px;
+    padding: 10px 0 18px 0;
+}
+
+h2
+{
+    line-height: 36px;
+    font-size: 2em;
+    font-weight: normal;
+    padding-top: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 6px;
+    border-bottom: 3px solid #c2b2d4;
+}
+
+h3
+{
+    font-size: 1.7em;
+    font-weight: normal;
+    border-bottom: 4px solid #E8E8E8;
+    padding: 0 0 5px;
+    margin-bottom: 0.4em;
+    margin-top: 1em;
+}
+
+.color
+{
+    color: #1E250D;
+}
+
+.text
+{
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #1E250D;
+}
+
+#author
+{
+    float: right;
+    font-variant: small-caps;
+    font-size: 1.5em;
+}
+
+ul
+{
+    padding-left: 5%;
+}
+
+
+table {
+    margin-bottom: 16px;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th {
+    font-weight: bold;
+}
+
+th, td {
+    height: 13px;
+    padding: 2px 4px;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.bold
+{
+        font-weight: bold;
+}
