@@ -19,7 +19,7 @@ class EasterController extends Controller
             $year = $this->getRequest()->get("year");
             $returnType = $this->getRequest()->get("returnType");
             if (is_null($year) == TRUE || is_null($returnType) == TRUE || Calendar::isCalendar($returnType) == FALSE) {
-                throw new \Exception("Error: Missing or bad arguments.\nArguments: year [format: YYYY] && returnType [A calendar type. You can check them on /info.");
+                throw new \Exception("Error: Missing or bad arguments.\nArguments: year [format: YYYY] && returnType [A calendar type. You can check them on /documentation.");
             }
             $date = Calendar::getEasterDate($year, $returnType);
             $data = array(

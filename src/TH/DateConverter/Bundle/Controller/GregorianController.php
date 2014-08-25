@@ -19,7 +19,7 @@ class GregorianController extends Controller
             $date = $this->getRequest()->get("date");
             $returnType = $this->getRequest()->get("returnType");
             if (is_null($date) == TRUE || is_null($returnType) == TRUE || Calendar::typeExist($returnType) == FALSE) {
-                throw new \Exception("Error: Missing or bad arguments.\nArguments: date [format: DD/MM/YYYY] && returnType [See on /calendars for more information.]");
+                throw new \Exception("Error: Missing or bad arguments.\nArguments: date [format: DD/MM/YYYY] && returnType [Go on /documentation for more information.]");
             }
             $gregorianDate = new Date($date, CalendarType::Gregorian);
             if ($returnType == CalendarType::Julian)

@@ -24,7 +24,7 @@ class KingController extends Controller
             $date = $this->getRequest()->get("kingDate");
             $king = $this->getRequest()->get("king");
             if (is_null($date) == TRUE || is_null($king) == TRUE) {
-                throw new \Exception("Error: Missing or bad arguments.\nArgument: kingDate [format: DD/MM/YY] and king. You can see all the kings managed on /info.");
+                throw new \Exception("Error: Missing or bad arguments.\nArgument: kingDate [format: DD/MM/YY] and king. You can see all the kings managed on /documentation.");
             }
             $convertDate = Calendar::kingToGregorian(new Date($date, CalendarType::Julian), $king, $this->getDoctrine()->getManager());
             $data = array(
@@ -54,7 +54,7 @@ class KingController extends Controller
             'input' => 'datetime',
             'label' => "Start of reign (dd/mm/yyyy)",
             'years' => range(0, 2000),
-            'empty_value' => array('year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'),
+            'empty_value' => array('year' => 'Year', 'month' => 'Month', 'day' => 'Day'),
             'pattern' => "{{ day }}/{{ month }}/{{ year }}",
             'data' => new DateTime("1066-12-25")
         );
@@ -63,7 +63,7 @@ class KingController extends Controller
             'input' => 'datetime',
             'years' => range(0, 2000),
             'label' => "End of reign (dd/mm/yyyy)",
-            'empty_value' => array('year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'),
+            'empty_value' => array('year' => 'Year', 'month' => 'Month', 'day' => 'Day'),
             'pattern' => "{{ day }}/{{ month }}/{{ year }}",
             'data' => new DateTime("1087-09-09")
         );
