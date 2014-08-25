@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'THDateConverterBundle:Default:base.html.twig' %}
 
 {% block title %}Documentation{% endblock %}
 
@@ -36,7 +36,7 @@
             </div>
         <h2>How do I access to this API?</h2>
             <div class="text">
-                In order to use this API, there are multiple ways. Currently, no servers are available on the internet but the entire code is on github, and you can find it <a href="https://github.com/Joyas/date-converter">here</a>. This API has been code using the framework symfony2 (You can find all the information about it <a href="http://symfony.com/">here</a>). This framework use the infrastructure MVC (Model - View - Controller) in order to simplify the development and the maintenance of the code. <br /><br />Symfony2 is structured using what is called a bundle. You can easily add a bundle on your project in order to use what is contained. The date-converter project is based on one bundle, the THDateConverterBundle. To do that, you just have to put the repository TH on your project and restart it. <br /><br />The second way is to install the full project and launch a server in localhost. All the install process is described on the README.md
+                In order to use this API, there are multiple ways. Currently, no servers are available on the internet but the entire code is on github, and you can find it <a href="https://github.com/Joyas/date-converter">here</a>. This API has been code using the framework symfony2 (You can find all the information about it <a href="http://symfony.com/">here</a>). This framework use the infrastructure MVC (Model - View - Controller) in order to simplify the development and the maintenance of the code. <br /><br />Symfony2 is structured using what is called a bundle. You can easily add a bundle on your project in order to use what is contained. The date-converter project is based on one bundle, the THDateConverterBundle. To do that, you just have to put the repository TH in the repository src/ of your symfony2 project and then change the configuration of routing in /app/config/routing.yml. Also, a database must be configure on /app/config/parameters.yml, and you should update your database if you already have one (Information <a href="http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema">here</a>). You can find all the information about how create a database in a symfony project <a href="http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema">here</a>.<br /><br />The second way is to install the full project and launch a server in localhost. All the install process is described on the README.md file.
             </div>
         <h1>The WebService</h1>
             <h2>What is a Web Service?</h2>
@@ -878,7 +878,7 @@
                 </div>
                 <h1> Conclusion </h1>
                 <div class="text">
-                    As you see, this project is already working. However, we would like to manage the more possible of calendars, so some of them could be add at anytime. You can contact us using the Github account or even participate to this project by the same way !<br /><br />
+                    As you see, this project is already working. However, we would like to manage the more possible calendars, so some of them could be add at anytime. You can contact us using the Github account (<a href="https://github.com/Joyas/date-converter">here</a>) or even participate to this project!<br /><br />
                     <strong>Thank you for being interested in this project!</strong>
                 </div>
         </div>
