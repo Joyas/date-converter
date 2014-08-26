@@ -4,7 +4,8 @@ README
 Description of this project
 -----------------
 
-This project is a Symfony2 bundle which allow to convert a date from a calendar to another. For example from the Julian calendar to the gregorian one. After the installation, you can see a full description of this application on the route /documentation, and also all the convertion which are working.
+This project is a Symfony2 project (Can be used as a Symfony2 bundle) which allows to convert a date using a specific calendar to another date using a different calendar. For example from the Julian calendar to the gregorian one. 
+After the installation, you can see a full description of this application on the route /documentation, and also all the convertions which are working. (You can see the html page of this documentation in /src/TH/DateConverter/Bundle/Resources/views/Documentation/index.html)
 
 Install this project: global explanations
 -----------------
@@ -13,17 +14,19 @@ In order to use this project, you can either add the bundle to your symfony proj
 
 In order to install the project, you have to:
 
-  * Install a web server (Apache for example) using PHP with a higher version than 5.3.8.
+  * Install a web server (Apache for example) using PHP with a higher version than 5.3.8. (I recommand you to use WAMP/MAMP or LAMP if you are not used to those technologies. They contain a web server, a mysql server and a good version of PHP)
   * Install a database server with PDO (a mysql server and mysql_pdo for example).
   * Then, you can download the date-converter project on github.
-  * Then you have to download composer.phar on https://getcomposer.org/download/ and execute the command line "php composer.phar update" in the project directory, in order to download all the extentions which are needed for date-converter.
-  * Now, the project should be well initialize, so you just have to launch the web server and go to http://localhost/date-converter/web/config.php (With the good port) in order to know if everything is alright.
-  * Then, you must configure the database server in the file /app/config/parameters.yml
+  * You have to download composer.phar on https://getcomposer.org/download/ and execute the command line "php composer.phar update" in the project directory, in order to download all the extentions which are needed for date-converter.
+  * Now, the project should be well initialize, so you just have to launch the web server and go to http://localhost/date-converter/web/config.php (with the good port) in order to know if everything is alright.
+  * Then, you must configure the database server in the file /app/config/parameters.yml (If you are using WAMP/MAMP/LAMP, the default port is 8889, the password and username are root, and you should name your database date-converter)
   * In order to create the database, launch php app/console doctrine:database:create
-  * Then, you should import the initial data on your database by importing the file "db.sql" situated at the root of date-converter.
+  * Then, you should import the initial data on your database by importing the file "db.sql" situated at the root of date-converter. If you do not do that, an exception will be throw if you go to /documentation because the table King must be set.
   * After, you can go to http://localhost/date-converter/web/app_dev.php/documentation (with the good port) in order to have more information about this project ! If an error 404 appears, there is probably a problem with your web server or the URL (maybe the port), otherwise the problem should come from the database server.
 
 I recommand you to download WAMP (on windows), LAMP (on Linux) or MAMP (on MacOS). Those packages already contain the web server Apache, a good version of PHP, and a mysql server.
+
+Finally, you can enjoy the application and modify it as much as you want! Enjoy ! :)
 
 Install this project: OSx
 -----------------
