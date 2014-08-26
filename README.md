@@ -7,8 +7,9 @@ Description of this project
 This project is a Symfony2 project (Can be used as a Symfony2 bundle) which allows to convert a date using a specific calendar to another date using a different calendar. For example from the Julian calendar to the gregorian one. 
 After the installation, you can see a full description of this application on the route /documentation, and also all the convertions which are working. (You can see the html page of this documentation in /src/TH/DateConverter/Bundle/Resources/views/Documentation/index.html)
 
-Install this project: global explanations
------------------
+## Installing
+
+### Overall
 
 In order to use this project, you can either add the bundle to your symfony project or install the full project and run the project in localhost.
 
@@ -28,8 +29,7 @@ I recommand you to download WAMP (on windows), LAMP (on Linux) or MAMP (on MacOS
 
 Finally, you can enjoy the application and modify it as much as you want! Enjoy ! :)
 
-Install this project: OSx
------------------
+### MacOS
 
 Below, all the step to launch the application on OSx using MAMP: 
 
