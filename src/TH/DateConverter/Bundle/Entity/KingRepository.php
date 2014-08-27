@@ -10,7 +10,7 @@ class KingRepository extends EntityRepository
     {
           return $this->getEntityManager()
             ->createQuery(
-                'SELECT k FROM THDateConverterBundle:King k WHERE k.name = \'' . $name . '\''
+                'SELECT k FROM THDateConverterBundle:King k WHERE LOWER(k.name) = LOWER(\'' . $name . '\')'
             )
             ->getResult();
     }

@@ -424,6 +424,237 @@
                     </tbody>
                 </table>
             </div>
+            <!-- --------------------------------------- -->
+            
+            <h2 class="bold">GET /french_republican</h2>
+            <div class="text">
+                This is used to convert a date of the french republican calendar into the gregorian calendar.
+            </div>            
+            <h3>Parameters</h3>
+            <div class="text">
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                date 
+                            </td>
+                            <td>
+                                The date using the republican calendar that you want to convert. 
+                            </td>
+                            <td>
+                                DD/MM/Y
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                or you can also used instead : <br />
+                   <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                day 
+                            </td>
+                            <td>
+                                The day of the date.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                month 
+                            </td>
+                            <td>
+                                The month of the date in string. You can see all the month in the section "Months".
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                year 
+                            </td>
+                            <td>
+                                The year of the string.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Response Content</h3>
+            <div class="text">
+                The main parameters of the response: <br />
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                responseCode
+                            </td>
+                            <td>
+                                Content either "success" or "failure" to know if it works.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                result
+                            </td>
+                            <td>
+                                If it success, contains all the information that you want depends of the parameters, otherwise is empty.
+                            </td>
+                            <td>
+                                Array
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                The content of the "result" array:<br />
+               <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                originalDate
+                            </td>
+                            <td>
+                                The date that you send to the API.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                convertDate
+                            </td>
+                            <td>
+                                The convertion of the originalDate in the gregorian calendar.
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                day
+                            </td>
+                            <td>
+                                The day of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                month
+                            </td>
+                            <td>
+                                The month of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                year
+                            </td>
+                            <td>
+                                The year of the convertDate.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                calendarType
+                            </td>
+                            <td>
+                                The convertDate calendar type. All the type are described on the Calendar Type section.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- --------------------------------------- -->
             <h2 class="bold">GET /easter</h2>
             <div class="text">
                 This is used to know the date of the easter day on a specific year. 
@@ -842,6 +1073,28 @@
                                 yes
                             </td>
                         </tr>
+                          <tr>
+                            <td>
+                                The french republican Calendar
+                            </td>
+                            <td>
+                                FrenchRepublicanCalendar
+                            </td>
+                            <td>
+                                yes
+                            </td>
+                        </tr>
+                          <tr>
+                            <td>
+                                The Kings
+                            </td>
+                            <td>
+                                See the section Kings
+                            </td>
+                            <td>
+                                yes
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -875,6 +1128,65 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                </div>
+                 <h2>Months of the Republican Calendar</h2>
+                <div class="text">
+                    <table>
+                        <tbody> 
+                            <tr>
+                                <th>
+                                Month name that you can used as parameter for the /french_republican route.                               
+                                </th>
+                                <th>
+                                    Number of the month
+                                </th>   
+                            </tr>
+                            {% for key, value in month_french_calendar %}
+                                 <tr>
+                                    <td>
+                                        {{ value }}
+                                    </td>
+                                    <td>
+                                        {{ key }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <h2>Months of the Julian and Gregorian Calendar</h2>
+                <div class="text">
+                    <table>
+                        <tbody> 
+                            <tr>
+                                <th>
+                                Month name that you can used as parameter for the /gregorian and /julian routes.
+                                </th>
+                                <th>
+                                    Number of the month
+                                </th>   
+                            </tr>
+                            {% for key, value in month_gregorian_julian %}
+                                 <tr>
+                                    <td>
+                                        {{ value }}
+                                    </td>
+                                    <td>
+                                        {{ key }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <h1> Limits and general information </h1>
+                <h2>Gregorian and Julian calendars</h2>
+                <div class="text">
+                    For all the convertion, the Gregorian and Julian have some limits of date. Indeed, the minimal year is -4714 and the maximal year is 9999.
+                </div>
+                <h2>The french republican calendar</h2>
+                <div class="text">
+                    For all the convertion, the french republican calendar has some limits. Indeed, the minimal year is 1 and the maximal year is 9 for historical reasons. <br /> The maximal number for the month is 13, you can see it in the Months of the Republican Calendar section. The maximal number for day is 30.
                 </div>
                 <h1> Conclusion </h1>
                 <div class="text">

@@ -11,26 +11,25 @@ use TH\DateConverter\Bundle\CustomClasses\Calendar;
 use TH\DateConverter\Bundle\CustomClasses\Request;
 
 
-class GregorianController extends Controller
+class FrenchRepublicanController extends Controller
 {
     public function indexAction()
     {
         try {
             $date = $this->getRequest()->get("date");
-            $returnType = $this->getRequest()->get("returnType");
-            $em = $this->getDoctrine()->getManager();
-            if (is_null($date) == TRUE || is_null($returnType) == TRUE || Calendar::typeExist($returnType, $em) == FALSE) {
-                throw new \Exception("Error: Missing or bad arguments.\nArguments: date [format: DD/MM/YYYY] && returnType [Go on /documentation for more information.]");
+            $day = $this->getRequest()->get("day");
+            $monthName = $this->getRequest()->get("monthName");
+            $year = $this->getRequest()->get("year");
+            if ((is_null($date) == TRUE) && (is_null($day) == TRUE || is_null($monthName) == TRUE || is_null($year) == TRUE)) {
+                throw new \Exception("Error: Missing or bad arguments.\nArgument: date [format: DD/MM/Y] or day [format: DD] && monthName [format: String] && year [format: Y].");
             }
-            $gregorianDate = new Date($date, CalendarType::Gregorian);
-            if ($returnType == CalendarType::Julian)
-                $convertDate = Calendar::GregorianToJulian($gregorianDate);
-            else if ($returnType == CalendarType::FrenchRepublicanCalendar)
-                $convertDate = Calendar::GregorianToFrenchCalendar($gregorianDate);
-            else if ($returnType == CalendarType::Gregorian)
-                $convertDate = $gregorianDate;
-            else
-                $convertDate = Calendar::GregorianToKing($gregorianDate, $returnType, $this->getDoctrine()->getManager());
+            if (is_null($date))
+            {
+                $month = Calendar::getMonthNbrByName($monthName, CalendarType::FrenchRepublicanCalendar);
+                $date = Date::dateToString($day, $month, $year);
+            }
+            $frenchRepublicanDate = new Date($date, CalendarType::FrenchRepublicanCalendar);
+            $convertDate = Calendar::FrenchToGregorian($frenchRepublicanDate);
             $data = array(
                 "responseCode" => "success",
                 "responseMessage" => "success",

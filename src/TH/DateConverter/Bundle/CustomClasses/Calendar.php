@@ -39,7 +39,7 @@ class Calendar
             return ($date);
     }
     
-    
+    // Translate a king date to gregorian
     public static function kingToGregorian($date, $king, $em) {
         $repository = $em->getRepository('THDateConverterBundle:King');
         $kingEntity = $repository->getKingByName($king);
@@ -51,6 +51,67 @@ class Calendar
             $finalDate = new Date(Date::dateToString($date->getDay(), $date->getMonth(), $date->getYear() + $kingYear), CalendarType::Gregorian);
             return ($finalDate);
         }
+    }
+    
+    // Translate a french date to gregorian
+    public static function frenchToGregorian($date) {
+        if ($date->getType() == CalendarType::FrenchRepublicanCalendar)
+        {
+            $d = $date->getDay();
+            $m = $date->getMonth();
+            $y = $date->getYear();
+            $jd = frenchtojd($m, $d, $y);
+            $date = jdtogregorian($jd);
+            return (new Date(Date::mdyToDmy($date), CalendarType::Gregorian));
+        }
+        else 
+            return ($date);
+    }
+    
+    // Translate a date from gregorian to french republican calendar
+    public static function GregorianToFrenchCalendar($date) {
+        if ($date->getType() == CalendarType::Gregorian)
+        {
+            $d = $date->getDay();
+            $m = $date->getMonth();
+            $y = $date->getYear();
+            $jd = gregoriantojd($m, $d, $y);
+            $date = jdtofrench($jd);
+            return (new Date(Date::mdyToDmy($date), CalendarType::FrenchRepublicanCalendar));
+        }
+        else 
+            return ($date);
+    }
+    
+    public static function GregorianToKing($date, $king, $em) {
+        if ($date->getType() == CalendarType::Gregorian)
+        {
+            $repository = $em->getRepository('THDateConverterBundle:King');
+            $kingEntity = $repository->getKingByName($king);
+            $d = $date->getDay();
+            $m = $date->getMonth();
+            $y = $date->getYear() - (intval(date_format($kingEntity[0]->getStartDateReign(), 'Y')));
+            return (new Date(Date::dateToString($d, $m, $y), $kingEntity[0]->getName(), $em));
+        }
+        else 
+            throw \Exception("The king " . $king . " does not exist. Go check on /documentation the king which are managed.");
+    }
+    
+    public static function getMonthNbrByName($month, $type)
+    {
+        
+        if ($type == CalendarType::FrenchRepublicanCalendar)
+            $calendarType = CAL_FRENCH;
+        else if ($type == CalendarType::Julian)
+            $calendarType = CAL_JULIAN;
+        else if ($type == CalendarType::Gregorian)
+            $calendarType = CAL_GREGORIAN;
+        $calInfos = cal_info($calendarType);
+        foreach ($calInfos["months"] as $key => $value){
+            if (strtolower($value) == strtolower($month))
+                return $key;
+        }
+        return (-1);   
     }
     
     // As described in 
@@ -99,16 +160,26 @@ class Calendar
             return (Calendar::getEasterOfJulianYear($year));
     }
     
-    // Check if $type exists in the CalendarType. Every CalendarType must be check on this function, even the kings.
-    public static function typeExist($type) {
-        switch ($type) {
-            case CalendarType::Julian:
-                return (TRUE);
-            case CalendarType::Gregorian:
-                return (TRUE);
-            default:
-                return (FALSE);
+    public static function isKing($type, $em) {
+        if (is_null($em) == TRUE)
+            return (FALSE);
+        $repository = $em->getRepository('THDateConverterBundle:King');
+        $kingEntity = $repository->findAll();
+        foreach ($kingEntity as $king){
+            if (strtolower($king->getName()) == strtolower($type))
+              return (TRUE); 
         }
+        return (FALSE);
+    }
+    
+    // Check if $type exists in the CalendarType. Every CalendarType must be check on this function, even the kings.
+    public static function typeExist($type, $em) {
+        if (Calendar::isKing($type, $em) == TRUE
+            || $type == CalendarType::Julian 
+            || $type == CalendarType::Gregorian 
+            || $type == CalendarType::FrenchRepublicanCalendar)
+            return (TRUE);
+        return (FALSE);
     }
     
     // Check if $type is a calendar, like gregorian or gregorian. The kings, for example, are not a calendar.
@@ -117,6 +188,8 @@ class Calendar
             case CalendarType::Julian:
                 return (TRUE);
             case CalendarType::Gregorian:
+                return (TRUE);
+            case CalendarType::FrenchRepublicanCalendar:
                 return (TRUE);
             default:
                 return (FALSE);

@@ -9,12 +9,11 @@ class Date
     private $_year;
     private $_dateType;
     
-    function __construct($date, $type) {
-        
+    function __construct($date, $type, $em = NULL) {
         $split_date = preg_split('/\//', $date);
-        if (count($split_date) == 3)
+     if (count($split_date) == 3 && Calendar::typeExist($type, $em) == TRUE)
         {
-            $this->setDate(intval($split_date[0]), intval($split_date[1]), intval($split_date[2]));
+            $this->setDate(intval($split_date[0]), intval($split_date[1]), intval($split_date[2]), $type);
             $this->_dateType = $type;
         }
         else
@@ -45,23 +44,38 @@ class Date
     {
         return ($this->_day . "/" . $this->_month . "/" . $this->_year);
     }
-    private function setDate($day, $month, $year)
+    private function setDate($day, $month, $year, $type)
     {
-        if ($day > 0 && $month > 0 && $day <= 31 && $month <= 12)
+        if ($type == CalendarType::FrenchRepublicanCalendar)
+            {
+                $monthNbr = 13;
+                $dayNbr = 30;
+                $yearMin =  1;
+                $yearMax = 14;
+            
+            }
+        else
+            {
+                $monthNbr = 12;
+                $dayNbr = 31;
+                $yearMin =  -4714;
+                $yearMax = 9999;
+            }
+        if ($day > 0 && $month > 0 && $day <= $dayNbr && $month <= $monthNbr && $year >= $yearMin && $year <= $yearMax)
         {
             $this->_day = $day;
             $this->_month = $month;
             $this->_year = $year;
         }
         else
-            $this->error();
+            $this->error("test");
     }
    
     private function error($error = null)
     {
         if ($error == null)
         {
-            $error = "Your date does not has the good format. The format is DD/MM/YYYY with 0 < DD <= 31 and 0 < MM <= 12 and calendarType has it is described on /calendars";
+            $error = "Your date or type parameters does not has the good format. You should check those formats on /documentation.";
         }
        throw new \Exception($error);
     }
