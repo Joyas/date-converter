@@ -84,6 +84,22 @@ class Calendar
             return ($date);
     }
     
+    // Translate a date from gregorian to jewish calendar
+    public static function GregorianToJewish($date) {
+        if ($date->getType() == CalendarType::Gregorian)
+        {
+            $d = $date->getDay();
+            $m = $date->getMonth();
+            $y = $date->getYear();
+            $jd = gregoriantojd($m, $d, $y);
+            $date = jdtojewish($jd);
+            return (new Date(Date::mdyToDmy($date), CalendarType::Jewish));
+        }
+        else 
+            return ($date);
+    }
+    
+    // Translate a gregorian date in a date using the regnal year of the $king.
     public static function GregorianToKing($date, $king, $em) {
         if ($date->getType() == CalendarType::Gregorian)
         {
@@ -98,7 +114,8 @@ class Calendar
             throw \Exception("The king " . $king . " does not exist. Go check on /documentation the king which are managed.");
     }
    
-      public static function feastToGregorian($year, $day, $feast, $calendarType) {
+    // Translate the Gregorian date from a year, a day and a feast.
+    public static function feastToGregorian($year, $day, $feast, $calendarType) {
         if (Calendar::isFeast($feast) == TRUE && Calendar::isCalendar($calendarType) == TRUE)
          {
             $feastDate = Calendar::getDateOfFeast($day, $year, $feast);
@@ -113,7 +130,22 @@ class Calendar
             throw \Exception("The feast " . $feast . " does not exist. Go check on /documentation the feasts which are managed.");
     }
     
+    public static function JewishToGregorian($date)
+    {
+        if ($date->getType() == CalendarType::Jewish)
+        {
+            $d = $date->getDay();
+            $m = $date->getMonth();
+            $y = $date->getYear();
+            $jd = jewishtojd($m, $d, $y);
+            $date = jdtogregorian($jd);
+            return (new Date(Date::mdyToDmy($date), CalendarType::Gregorian));
+        }
+        else 
+            return ($date);
+    }
     
+    // You give the name of a month in the $type calendar, and it returns the number. For example January / Gregorian returns 1.
     public static function getMonthNbrByName($month, $type)
     {
         
@@ -123,6 +155,8 @@ class Calendar
             $calendarType = CAL_JULIAN;
         else if ($type == CalendarType::Gregorian)
             $calendarType = CAL_GREGORIAN;
+        else if ($type == CalendarType::Jewish)
+            $calendarType = CAL_JEWISH;
         $calInfos = cal_info($calendarType);
         foreach ($calInfos["months"] as $key => $value){
             if (strtolower($value) == strtolower($month))
@@ -194,7 +228,8 @@ class Calendar
         if (Calendar::isKing($type, $em) == TRUE
             || $type == CalendarType::Julian 
             || $type == CalendarType::Gregorian 
-            || $type == CalendarType::FrenchRepublicanCalendar)
+            || $type == CalendarType::FrenchRepublicanCalendar
+            || $type == CalendarType::Jewish)
             return (TRUE);
         return (FALSE);
     }
@@ -207,6 +242,8 @@ class Calendar
             case CalendarType::Gregorian:
                 return (TRUE);
             case CalendarType::FrenchRepublicanCalendar:
+                return (TRUE);
+            case CalendarType::Jewish:
                 return (TRUE);
             default:
                 return (FALSE);

@@ -14,6 +14,9 @@ After the installation, you can see a full description of this application
 on the route /documentation, and also all the convertions which are working. 
 (You can see the html page of this documentation in 
 /src/TH/DateConverter/Bundle/Resources/views/Documentation/index.html)
+However, because it is a symfony bundle, when you query the server, you always
+must query the route /web and then the route that you want to query. For example
+URL/web/documentation.
 
 ## Installing
 

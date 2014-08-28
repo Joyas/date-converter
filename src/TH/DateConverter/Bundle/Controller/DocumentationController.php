@@ -13,8 +13,10 @@ class DocumentationController extends Controller
         $kings = $repository->findAll();
         $month_french_calendar = cal_info(CAL_FRENCH);
         $month_julian_gregorian_calendars = cal_info(CAL_JULIAN);
+        $month_jewish_calendar = cal_info(CAL_JEWISH);
         return $this->render('THDateConverterBundle:Documentation:index.html.twig', 
             array('kings' => $kings, "month_french_calendar" => $month_french_calendar["months"],
-                "month_gregorian_julian" => $month_julian_gregorian_calendars["months"]));
+                "month_gregorian_julian" => $month_julian_gregorian_calendars["months"],
+                "month_jewish" => $month_jewish_calendar["months"]));
     }
 }

@@ -7,5 +7,6 @@ abstract class CalendarType
     const Julian = "Julian";
     const Gregorian = "Gregorian";
     const FrenchRepublicanCalendar = "FrenchRepublicanCalendar";
+    const Jewish = "Jewish";
     // etc ...
 }

@@ -29,6 +29,8 @@ class GregorianController extends Controller
                 $convertDate = Calendar::GregorianToFrenchCalendar($gregorianDate);
             else if ($returnType == CalendarType::Gregorian)
                 $convertDate = $gregorianDate;
+            else if ($returnType == CalendarType::Jewish)
+                $convertDate = Calendar::GregorianToJewish($gregorianDate);
             else
                 $convertDate = Calendar::GregorianToKing($gregorianDate, $returnType, $this->getDoctrine()->getManager());
             $data = array(

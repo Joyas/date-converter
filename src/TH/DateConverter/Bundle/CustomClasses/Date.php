@@ -54,6 +54,13 @@ class Date
                 $yearMax = 14;
             
             }
+        else if ($type == CalendarType::Jewish)
+            {
+                $monthNbr = 13;
+                $dayNbr = 30;
+                $yearMin = 1;
+                $yearMax = 9999;
+            }
         else
             {
                 $monthNbr = 12;

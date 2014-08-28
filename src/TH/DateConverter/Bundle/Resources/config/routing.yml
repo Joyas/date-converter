@@ -22,3 +22,6 @@ th_french_calendar:
 th_christian_feast:
     path:     /christian_feast
     defaults: { _controller: THDateConverterBundle:ChristianFeast:index }
+th_jewish_calendar:
+    path:     /jewish
+    defaults: { _controller: THDateConverterBundle:Jewish:index }
