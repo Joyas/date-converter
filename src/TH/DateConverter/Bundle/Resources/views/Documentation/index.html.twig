@@ -845,6 +845,218 @@
                     </tbody>
                 </table>
             </div>
+             <h2 class="bold">GET /christian_feast</h2>
+            <div class="text">
+                This is used to know the date of the easter day on a specific year. 
+            </div>            
+            <h3>Parameters</h3>
+            <div class="text">
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                year 
+                            </td>
+                            <td>
+                                The year of the feast
+                            </td>
+                            <td>
+                                YYYY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                returnType
+                            </td>
+                            <td>
+                                The type of the calendar in which you want the convert date.It can only be Julian or Gregorian.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                day
+                            </td>
+                            <td>
+                                The number of days after the feast
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                          <tr>
+                            <td>
+                                feast
+                            </td>
+                            <td>
+                                The feast which are used on the date you want to convert. See the Christian feasts section to know the feasts which are managed.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Response Content</h3>
+            <div class="text">
+                The main parameters of the response: <br />
+                <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                responseCode
+                            </td>
+                            <td>
+                                Content either "success" or "failure" to know if it works.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                responseMessage
+                            </td>
+                            <td>
+                                If it success, contains "success", otherwise contains an explanation of the failure.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                result
+                            </td>
+                            <td>
+                                If it success, contains all the information that you want depends of the parameters, otherwise is empty.
+                            </td>
+                            <td>
+                                Array
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                The content of the "result" array:<br />
+               <table>
+                    <tbody> 
+                        <tr>
+                            <th>
+                                Parameter
+                            </th>
+                            <th>
+                                Description
+                            </th>   
+                            <th>
+                                Format
+                            </th>   
+                        </tr>
+                        <tr>
+                            <td>
+                                originalDate
+                            </td>
+                            <td>
+                                The original date that you send
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                convertDate
+                            </td>
+                            <td>
+                                The result of the convertion
+                            </td>
+                            <td>
+                                DD/MM/YYYY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                day
+                            </td>
+                            <td>
+                                The day of the convert date.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                month
+                            </td>
+                            <td>
+                                The month of the convert date.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                year
+                            </td>
+                            <td>
+                                The year of the convert date.
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                calendarType
+                            </td>
+                            <td>
+                                The easter date calendar type. All the type are described on the Calendar Type section.
+                            </td>
+                            <td>
+                                String
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <h2 class="bold">GET /king</h2>
             <div class="text">
                 This is used to convert a date using the king in the calendar that you specified. For example, you can know the gregorian date of the date: 2nd May, 5 Henry V.
@@ -1129,6 +1341,80 @@
                         </tbody>
                     </table>
                 </div>
+                <h2>Christian feasts</h2>
+                <div class="text">
+                    <table>
+                        <tbody> 
+                            <tr>
+                                <th>
+                                    Feast name as you must use in /christian_feast                            
+                                </th>
+                                <th>
+                                    Feast Description
+                                </th>
+                                <th>
+                                    Date of the feast
+                                </th>   
+                            </tr>
+                             <tr>
+                                <td>
+                                    Easter
+                                </td>
+                                <td>
+                                    Celebration of the ressurection of Jesus Christ
+                                </td>
+                                <td>
+                                    Moveable feast, corresponding at the first Sunday after the full moon following the March equinox.
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    Annunciation
+                                </td>
+                                <td>
+                                    It is the day when Gabriel said to Marie that she can conceive Jesus.
+                                </td>
+                                <td>
+                                    The 25th of March
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Christmas
+                                </td>
+                                <td>
+                                    The birth of jesus
+                                </td>
+                                <td>
+                                    The 25th of December
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Midsummer
+                                </td>
+                                <td>
+                                     The feast of St. John the Baptist
+                                </td>
+                                <td>
+                                    The 24th of June
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    Michaelmas
+                                </td>
+                                <td>
+                                     The feast of Saint Michael the Archangel 
+                                </td>
+                                <td>
+                                    The 29th of September
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
                  <h2>Months of the Republican Calendar</h2>
                 <div class="text">
                     <table>

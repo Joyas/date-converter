@@ -3,6 +3,7 @@
 namespace TH\DateConverter\Bundle\CustomClasses;
 
 use TH\DateConverter\Bundle\CustomClasses\CalendarType;
+use TH\DateConverter\Bundle\CustomClasses\FeastType;
 use TH\DateConverter\Bundle\CustomClasses\Date;
 use TH\DateConverter\Bundle\Entity\King;
 
@@ -96,6 +97,22 @@ class Calendar
         else 
             throw \Exception("The king " . $king . " does not exist. Go check on /documentation the king which are managed.");
     }
+   
+      public static function feastToGregorian($year, $day, $feast, $calendarType) {
+        if (Calendar::isFeast($feast) == TRUE && Calendar::isCalendar($calendarType) == TRUE)
+         {
+            $feastDate = Calendar::getDateOfFeast($day, $year, $feast);
+            $d = $feastDate->getDay();
+            $m = $feastDate->getMonth();
+            $y = $feastDate->getYear();
+            $jd = gregoriantojd($m, $d, $year);
+            $date = jdtogregorian($jd + $day);
+            return (new Date(Date::mdyToDmy($date), $calendarType));
+        }
+        else 
+            throw \Exception("The feast " . $feast . " does not exist. Go check on /documentation the feasts which are managed.");
+    }
+    
     
     public static function getMonthNbrByName($month, $type)
     {
@@ -156,7 +173,7 @@ class Calendar
     public static function getEasterDate($year, $type = CalendarType::Gregorian) {
         if ($type == CalendarType::Gregorian)
             return (Calendar::getEasterOfGregorianYear($year));
-        else 
+        else
             return (Calendar::getEasterOfJulianYear($year));
     }
     
@@ -194,6 +211,60 @@ class Calendar
             default:
                 return (FALSE);
         }   
+    }
+    
+    // Check if $type is a christianFeast. All the feast are listed on FeastType.
+    public static function isFeast($type) {
+        switch ($type) {
+            case FeastType::Easter:
+                return (TRUE);
+            case FeastType::Annunciation:
+                return (TRUE);
+            case FeastType::Christmas:
+                return (TRUE);
+            case FeastType::Midsummer:
+                return (TRUE);
+            case FeastType::Michaelmas:
+                return (TRUE);
+            default:
+                return (FALSE);
+        }   
+    }
+    
+    public static function getDateOfFeast($year, $calendarType, $feast)
+    {
+        if ($feast == FeastType::Annunciation)
+        {
+            $d = 25;
+            $m = 3;
+            $y = $year;
+        }
+        else if ($feast == FeastType::Christmas)
+        {
+            $d = 25;
+            $m = 12;
+            $y = $year;   
+        }
+        else if ($feast == FeastType::Midsummer)
+        {
+            $d = 24;
+            $m = 6;
+            $y = $year;   
+        }
+        else if ($feast == FeastType::Michaelmas)
+        {
+            $d = 29;
+            $m = 9;
+            $y = $year;   
+        }
+        else if ($feast == FeastType::Easter)
+        {
+            $easterDate = Calendar::getEasterDate($year, $calendarType);
+            $d = $easterDate->getDay();
+            $m = $easterDate->getMonth();
+            $y = $year;
+        }
+        return (new Date(Date::dateToString($d, $m, $y), CalendarType::Gregorian));
     }
 }
 

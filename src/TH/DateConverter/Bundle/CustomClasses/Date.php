@@ -68,7 +68,7 @@ class Date
             $this->_year = $year;
         }
         else
-            $this->error("test");
+            $this->error();
     }
    
     private function error($error = null)

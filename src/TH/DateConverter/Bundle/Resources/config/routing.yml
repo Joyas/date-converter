@@ -18,4 +18,7 @@ th_documentation:
     defaults: { _controller: THDateConverterBundle:Documentation:index }
 th_french_calendar:
     path:     /french_republican
-    defaults: {_controller: THDateConverterBundle:FrenchRepublican:index }
+    defaults: { _controller: THDateConverterBundle:FrenchRepublican:index }
+th_christian_feast:
+    path:     /christian_feast
+    defaults: { _controller: THDateConverterBundle:ChristianFeast:index }
